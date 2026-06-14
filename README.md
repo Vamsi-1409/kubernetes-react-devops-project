@@ -1,70 +1,165 @@
-# Getting Started with Create React App
+# Kubernetes React DevOps Project 🚀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📌 Overview
+This project demonstrates an end-to-end DevOps workflow using a React application deployed on Kubernetes with CI/CD, monitoring, and autoscaling.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🏗️ Architecture
 
-### `npm start`
+GitHub  
+↓  
+GitHub Actions (CI/CD)  
+↓  
+Docker Image  
+↓  
+Docker Hub  
+↓  
+Kubernetes Cluster (Minikube)  
+↓  
+Deployment → Pods → Service → Ingress  
+↓  
+Prometheus + Grafana (Monitoring)  
+↓  
+Horizontal Pod Autoscaler (HPA)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- Docker  
+- Kubernetes (Minikube)  
+- GitHub Actions (CI/CD)  
+- React.js  
+- Nginx (optional production build)  
+- Prometheus  
+- Grafana  
+- Helm (optional)  
+- Horizontal Pod Autoscaler (HPA)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📦 Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🐳 Containerization
+- React application containerized using Docker
+- Docker Compose for local development
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ☸️ Kubernetes
+- Deployments
+- Services (NodePort)
+- Ingress Controller
+- ConfigMaps & Secrets
+- Horizontal Pod Autoscaling (HPA)
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 🔁 CI/CD Pipeline
+- GitHub Actions automation
+- Docker image build and push to Docker Hub
+- Image tagging using commit SHA
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 📊 Monitoring & Observability
+- Prometheus metrics collection
+- Grafana dashboards
+- Node and pod monitoring
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### 📈 Autoscaling
+- CPU-based Horizontal Pod Autoscaler
+- Auto scale up/down based on load
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🚀 Setup Instructions
 
-### Code Splitting
+### 1. Clone Repository
+git clone https://github.com/<your-username>/kubernetes-react-devops-project.git  
+cd kubernetes-react-devops-project  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+### 2. Build Docker Image
+docker build -t react-app .  
+docker run -p 3000:3000 react-app  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+### 3. Deploy to Kubernetes
+kubectl apply -f k8s/  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Check status:
+kubectl get pods  
+kubectl get svc  
+kubectl get ingress  
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 4. Access Application
+minikube service react-service  
 
-### Deployment
+OR  
+http://react.local  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+### 5. Enable Monitoring (Prometheus + Grafana)
+helm install monitoring prometheus-community/kube-prometheus-stack  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+kubectl port-forward svc/monitoring-grafana 3000:80  
+
+Login:
+- Username: admin  
+- Password: prom-operator  
+
+---
+
+### 6. Enable Autoscaling (HPA)
+kubectl autoscale deployment react-app --cpu-percent=50 --min=2 --max=5  
+
+---
+
+## 🔄 CI/CD Pipeline
+
+- Build Docker image  
+- Push to Docker Hub  
+- Tag image with commit SHA  
+- Triggered automatically via GitHub Actions  
+
+---
+
+## ⚠️ Common Issues Handled
+
+### ❌ CrashLoopBackOff
+Application crash or startup failure
+
+### ❌ ImagePullBackOff
+Wrong or missing Docker image
+
+### ❌ OOMKilled
+Memory limit exceeded
+
+### ❌ Metrics issues
+HPA showing `<unknown>` CPU usage
+
+---
+
+## 📈 Future Enhancements
+
+- Blue-Green Deployment  
+- Canary Deployment  
+- Helm packaging  
+- Terraform AWS EKS deployment  
+- ArgoCD GitOps workflow  
+
+---
+
+## 👨‍💻 Author
+
+Vamsi Krishna  
+DevOps Engineer | Kubernetes | AWS | CI/CD | Automation

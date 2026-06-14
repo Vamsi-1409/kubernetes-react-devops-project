@@ -14,7 +14,7 @@ This project demonstrates an end-to-end DevOps workflow using a React applicatio
 
 ## 🏗️ Architecture
 
-![Architecture](./screenshots/architecture.png)
+![Architecture](./Screenshots/architecture.png)
 
 GitHub  
 ↓  

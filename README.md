@@ -16,21 +16,6 @@ This project demonstrates an end-to-end DevOps workflow using a React applicatio
 
 ![Architecture](./Screenshots/architecture.png)
 
-GitHub  
-↓  
-GitHub Actions (CI/CD)  
-↓  
-Docker Image  
-↓  
-Docker Hub  
-↓  
-Kubernetes Cluster (Minikube)  
-↓  
-Deployment → Pods → Service → Ingress  
-↓  
-Prometheus + Grafana (Monitoring)  
-↓  
-Horizontal Pod Autoscaler (HPA)
 
 ---
 
